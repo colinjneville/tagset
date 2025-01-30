@@ -1,0 +1,30 @@
+[package]
+name = "tagset"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/colinjneville/tagset"
+readme = "../README.md"
+description = "Easily create trait-dispatching sum types"
+keywords = ["macro", "generator", "reflection", "compile-time", "serde"]
+categories = ["rust-patterns", "development-tools::procedural-macro-helpers"]
+
+[features]
+default = ["serde"]
+serde = ["dep:serde", "dep:erased-serde"]
+
+[dependencies]
+tagset-macro.workspace = true
+
+telety.workspace = true
+
+paste.workspace = true
+
+# feature = "serde"
+serde = { workspace = true, optional = true }
+erased-serde = { workspace = true, optional = true }
+
+[dev-dependencies]
+serde_json.workspace = true
+anyhow.workspace = true
+telety.workspace = true

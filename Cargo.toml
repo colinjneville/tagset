@@ -1,0 +1,35 @@
+[workspace]
+resolver = "2"
+members = [
+    "tagset", 
+    "tagset-macro",
+]
+
+[workspace.dependencies]
+tagset-macro = { version = "0.1.0", path = "tagset-macro" }
+tagset = { version = "0.1.0", path = "tagset" }
+
+# proc macros
+proc-macro2 = "1.0.92"
+quote = "1.0.37"
+syn = { version = "2.0.91", features = ["full"] }
+
+directed-visit = { version = "0.3.2", features = ["syn"] }
+
+paste = "1.0.15"
+telety = "0.3"
+
+erased-serde = "0.4.6"
+
+# dev-dependencies
+serde_json = "1.0.134"
+anyhow = "1.0.98"
+
+[workspace.dependencies.serde]
+version = "1.0.189"
+features = [
+    "std",
+    "derive",
+    "rc",
+]
+

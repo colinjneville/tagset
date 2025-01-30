@@ -1,0 +1,21 @@
+[package]
+name = "tagset-macro"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/colinjneville/tagset"
+
+[lib]
+proc-macro = true
+
+[features]
+default = []
+
+[dependencies]
+proc-macro2.workspace = true
+quote.workspace = true
+syn.workspace = true
+
+telety.workspace = true 
+
+directed-visit.workspace = true
