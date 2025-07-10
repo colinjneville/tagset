@@ -19,8 +19,6 @@ directed-visit = { version = "0.3.2", features = ["syn"] }
 paste = "1.0.15"
 telety = "0.3"
 
-erased-serde = "0.4.6"
-
 # dev-dependencies
 serde_json = "1.0.134"
 anyhow = "1.0.98"

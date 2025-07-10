@@ -11,7 +11,7 @@ categories = ["rust-patterns", "development-tools::procedural-macro-helpers"]
 
 [features]
 default = ["serde"]
-serde = ["dep:serde", "dep:erased-serde"]
+serde = ["dep:serde"]
 
 [dependencies]
 tagset-macro.workspace = true
@@ -22,7 +22,6 @@ paste.workspace = true
 
 # feature = "serde"
 serde = { workspace = true, optional = true }
-erased-serde = { workspace = true, optional = true }
 
 [dev-dependencies]
 serde_json.workspace = true
