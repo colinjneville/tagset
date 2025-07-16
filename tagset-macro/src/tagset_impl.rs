@@ -212,7 +212,7 @@ pub(crate) fn tagset_impl(input: TokenStream) -> syn::Result<TokenStream> {
                     #trait_impl_input
                 }
             },
-        );
+        ).with_telety_path(parse_quote!(#private_module::telety));
 
         commands.push(command);
     }
