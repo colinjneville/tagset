@@ -111,7 +111,7 @@ dependencies = [
 
 [[package]]
 name = "tagset"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "paste",
@@ -123,7 +123,7 @@ dependencies = [
 
 [[package]]
 name = "tagset-macro"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "directed-visit",
  "proc-macro2",

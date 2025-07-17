@@ -6,8 +6,8 @@ members = [
 ]
 
 [workspace.dependencies]
-tagset-macro = { version = "0.1.0", path = "tagset-macro" }
-tagset = { version = "0.1.0", path = "tagset" }
+tagset-macro = { version = "0.1.1", path = "tagset-macro" }
+tagset = { version = "0.1.1", path = "tagset" }
 
 # proc macros
 proc-macro2 = "1.0.92"
