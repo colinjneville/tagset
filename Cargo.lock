@@ -111,7 +111,7 @@ dependencies = [
 
 [[package]]
 name = "tagset"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "anyhow",
  "paste",
@@ -123,7 +123,7 @@ dependencies = [
 
 [[package]]
 name = "tagset-macro"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "directed-visit",
  "proc-macro2",
@@ -134,9 +134,9 @@ dependencies = [
 
 [[package]]
 name = "telety"
-version = "0.3.0"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "31d5098afa6f064f9f8c458bfc66eff954181af0709233974d1aefc9f8f50fb8"
+checksum = "2943d8bf5ff7479c45cd79d637bdf8551f60daa96c4fdd36e95c3a106fce9d46"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -147,9 +147,9 @@ dependencies = [
 
 [[package]]
 name = "telety-impl"
-version = "0.3.0"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cb0caa030c6ee90c3586b7781130dd42e3fa6298c06035ca4ab2aaf401f83cc9"
+checksum = "6478b9a4625eebe0a2a6d537be22d95e684fa3a5d99a1807d3ed36e796979f18"
 dependencies = [
  "bitflags",
  "directed-visit",
@@ -160,9 +160,9 @@ dependencies = [
 
 [[package]]
 name = "telety-macro"
-version = "0.3.0"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc91c1060f438a905875d013183f4d04ae1cfdc247b297d51eae6b89824d8b83"
+checksum = "f191e8e620a6a976a5f305cbfef8a3b14339f5e439f31e5d2adb241e58066576"
 dependencies = [
  "directed-visit",
  "proc-macro2",

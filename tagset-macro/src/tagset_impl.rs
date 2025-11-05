@@ -204,15 +204,17 @@ pub(crate) fn tagset_impl(input: TokenStream) -> syn::Result<TokenStream> {
             segment.arguments = syn::PathArguments::None;
         }
 
-        let command = telety::v1::TY.apply(
-            path,
-            parsing::TeletyItem::needle(),
-            quote! {
-                ::tagset::__private::tagset_trait_impl! {
-                    #trait_impl_input
-                }
-            },
-        ).with_telety_path(parse_quote!(#private_module::telety));
+        let command = telety::v1::TY
+            .apply(
+                path,
+                parsing::TeletyItem::needle(),
+                quote! {
+                    ::tagset::__private::tagset_trait_impl! {
+                        #trait_impl_input
+                    }
+                },
+            )
+            .with_telety_path(parse_quote!(#private_module::telety));
 
         commands.push(command);
     }
@@ -222,10 +224,13 @@ pub(crate) fn tagset_impl(input: TokenStream) -> syn::Result<TokenStream> {
 
     let extra_lifetime: syn::Lifetime = parse_quote!('_ref);
     let mut extra_lifetime_generics = generics.clone();
-    extra_lifetime_generics.params.push(parse_quote!(#extra_lifetime));
+    extra_lifetime_generics
+        .params
+        .push(parse_quote!(#extra_lifetime));
 
     let (impl_generics, type_generics, where_clause) = generics.split_for_impl();
-    let (extra_lifetime_impl_generics, _extra_lifetime_type_generics, _extra_lifetime_where_clause) = extra_lifetime_generics.split_for_impl();
+    let (extra_lifetime_impl_generics, _extra_lifetime_type_generics, _extra_lifetime_where_clause) =
+        extra_lifetime_generics.split_for_impl();
 
     let mut match_value_macro = TokenStream::new();
     let mut match_discriminant_macro = TokenStream::new();

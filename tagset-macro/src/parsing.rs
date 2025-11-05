@@ -815,7 +815,9 @@ impl TagsetImplInput {
         Ok(input)
     }
 
-    pub(crate) fn visitor(&self) -> syn::Result<Option<telety::visitor::ApplyGenericArguments<'_>>> {
+    pub(crate) fn visitor(
+        &self,
+    ) -> syn::Result<Option<telety::visitor::ApplyGenericArguments<'_>>> {
         if let Some(context) = self.context.element.last() {
             Ok(Some(context.visitor()?))
         } else {

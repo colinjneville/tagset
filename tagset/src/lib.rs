@@ -7,7 +7,7 @@
 //! * Compositable sets - Sets can easily include other sets as sub-sets.
 //! * Extended trait defaults - Annotate your trait to allow for trait defaults not supported by standard Rust,
 //!   such as associated type defaults.
-//! * (Mostly) scope-independent - With a few rare exceptions, nothing is required to be in scope, 
+//! * (Mostly) scope-independent - With a few rare exceptions, nothing is required to be in scope,
 //!   and types and traits are not required to have unique identifiers.
 //! ```rust
 //! /// Mark traits with `telety`(<https://crates.io/crates/telety>):
@@ -59,7 +59,7 @@
 //!
 //!     assert_eq!(set_a.ascii_char(), b'A');
 //!     assert_eq!(set_b.ascii_char(), b'B');
-//! 
+//!
 //!     // TryFrom<MySet> is implemented for all variants,
 //!     // as well as &MySet and &mut MySet versions
 //!     let a: my_impl::A = set_a.try_into().unwrap();
@@ -455,7 +455,10 @@
 //! The first element is the discriminant, the second is the inner variant.
 //!
 
-#![allow(clippy::crate_in_macro_def, reason = "This is intentional for telety aliasing")]
+#![allow(
+    clippy::crate_in_macro_def,
+    reason = "This is intentional for telety aliasing"
+)]
 
 // This allows us to use the #[tagset_meta] in this crate, which creates paths beginning with '::tagset'
 extern crate self as tagset;

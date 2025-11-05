@@ -6,8 +6,8 @@ members = [
 ]
 
 [workspace.dependencies]
-tagset-macro = { version = "0.1.1", path = "tagset-macro" }
-tagset = { version = "0.1.1", path = "tagset" }
+tagset-macro = { version = "0.1.2", path = "tagset-macro" }
+tagset = { version = "0.1.2", path = "tagset" }
 
 # proc macros
 proc-macro2 = "1.0.92"
@@ -17,7 +17,7 @@ syn = { version = "2.0.91", features = ["full"] }
 directed-visit = { version = "0.3.2", features = ["syn"] }
 
 paste = "1.0.15"
-telety = "0.3"
+telety = "0.4"
 
 # dev-dependencies
 serde_json = "1.0.134"
