@@ -595,7 +595,7 @@ impl TagsetContext {
         debug_assert_eq!(old_generic_params, Default::default());
     }
 
-    pub(crate) fn visitor(&self) -> syn::Result<telety::visitor::ApplyGenericArguments> {
+    pub(crate) fn visitor(&self) -> syn::Result<telety::visitor::ApplyGenericArguments<'_>> {
         telety::visitor::ApplyGenericArguments::new(
             &self.generic_params.element,
             self.generic_args
@@ -815,7 +815,7 @@ impl TagsetImplInput {
         Ok(input)
     }
 
-    pub(crate) fn visitor(&self) -> syn::Result<Option<telety::visitor::ApplyGenericArguments>> {
+    pub(crate) fn visitor(&self) -> syn::Result<Option<telety::visitor::ApplyGenericArguments<'_>>> {
         if let Some(context) = self.context.element.last() {
             Ok(Some(context.visitor()?))
         } else {

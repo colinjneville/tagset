@@ -4,7 +4,7 @@ use proc_macro2::{Span, TokenStream};
 use quote::{ToTokens, TokenStreamExt, quote};
 use syn::{parse_quote, parse_quote_spanned, parse2, spanned::Spanned};
 
-use crate::parsing;
+use crate::{parsing, telety_util};
 
 fn set_span_recursive(input: TokenStream, span: Span) -> TokenStream {
     let mut output = TokenStream::new();
@@ -37,7 +37,7 @@ pub(crate) fn tagset_trait_impl(input: TokenStream) -> syn::Result<TokenStream> 
     let item = telety_item.into_item();
 
     let telety = telety::Telety::new(&item)?;
-    let alias_map = telety.alias_map();
+    let alias_map = telety_util::make_alias_map(&telety)?;
     let mut telety_visitor = alias_map.visitor();
     // TODO  this needs double-checking, converting Self causes problems in function signatures
     // (e.g. `&self` gets translated to `&self: &Self` in syn, and the receiver can't be changed from Self)
@@ -76,7 +76,12 @@ pub(crate) fn tagset_trait_impl(input: TokenStream) -> syn::Result<TokenStream> 
                     .collect::<Result<_, _>>()?,
             };
 
-            for predicate in predicates {
+            for mut predicate in predicates {
+                // TODO would be more efficient to do this before applying open predicates
+                let mut direct = crate::direct::TagsetDirect::new();
+                directed_visit::visit_mut(&mut direct, &mut telety_visitor, &mut predicate);
+                direct.into_result()?;
+
                 generics.make_where_clause().predicates.push(predicate);
             }
         }

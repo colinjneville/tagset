@@ -3,7 +3,7 @@
 #[meta(bounds(for<VARIANT> VARIANT: serde::Deserialize<'de>))]
 pub trait DeserializeFromDiscriminant<'de>: crate::TagSet + Sized {
     #[meta(default {
-        match_by_discriminant!(discriminant, Variant => 
+        match_by_discriminant!(discriminant, Variant =>
             <Self as ::tagset::serde::DeserializeFromDiscriminant<'_>>::next_element_of_type::<_, Variant>(seq),
             // Invalid discriminant
             Err(<Self as ::tagset::serde::DeserializeFromDiscriminant<'_>>::invalid_discriminant(discriminant))
@@ -44,7 +44,7 @@ pub mod __private {
     pub use ::serde as serde_crate;
 
     pub trait ToUnexpected {
-        fn to_unexpected(&self) -> serde::de::Unexpected;
+        fn to_unexpected(&self) -> serde::de::Unexpected<'_>;
     }
 
     pub struct Visitor<T>(PhantomData<T>);
@@ -85,7 +85,7 @@ pub mod __private {
             $(
                 $(
                     impl ToUnexpected for $from {
-                        fn to_unexpected(&self) -> serde::de::Unexpected {
+                        fn to_unexpected(&self) -> serde::de::Unexpected<'_> {
                             serde::de::Unexpected::$variant(<$to>::from(*self))
                         }
                     }

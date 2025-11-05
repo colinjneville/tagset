@@ -11,18 +11,5 @@ pub(crate) fn make_alias_map<'map>(
     );
     direct.into_result()?;
 
-    // let attrs: Result<Vec<_>, _> = telety.attributes()
-    //     .iter()
-    //     .filter(|attr| attr.meta.path().is_ident("tagset"))
-    //     .map(|attr| attr.parse_args::<parsing::Attr>())
-    //     .collect();
-    // let attrs = attrs?;
-
-    // let mut visitor = telety::visitor::IdentifyAliases::new(&mut sub_map);
-
-    // for attr in &attrs {
-    //     attr.visit(&mut visitor);
-    // }
-
     Ok(sub_map)
 }
