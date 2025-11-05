@@ -455,6 +455,8 @@
 //! The first element is the discriminant, the second is the inner variant.
 //!
 
+#![allow(clippy::crate_in_macro_def, reason = "This is intentional for telety aliasing")]
+
 // This allows us to use the #[tagset_meta] in this crate, which creates paths beginning with '::tagset'
 extern crate self as tagset;
 
