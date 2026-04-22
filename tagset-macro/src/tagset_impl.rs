@@ -234,6 +234,7 @@ pub(crate) fn tagset_impl(input: TokenStream) -> syn::Result<TokenStream> {
 
     let mut match_value_macro = TokenStream::new();
     let mut match_discriminant_macro = TokenStream::new();
+    let mut foreach_macro = TokenStream::new();
 
     let mut arms = vec![];
     let mut into_impls = vec![];
@@ -270,6 +271,15 @@ pub(crate) fn tagset_impl(input: TokenStream) -> syn::Result<TokenStream> {
                     (#turbo_ty),
                     $ex
                 }
+            }
+        };
+
+        foreach_macro = quote! {
+            #foreach_macro
+            #private_module::telety::__private::find_and_replace! {
+                $ty,
+                (#turbo_ty),
+                $ex
             }
         };
 
@@ -370,6 +380,15 @@ pub(crate) fn tagset_impl(input: TokenStream) -> syn::Result<TokenStream> {
         }
     };
 
+    let foreach_macro: syn::Stmt = parse_quote! {
+        #[allow(unused_macros)]
+        macro_rules! foreach {
+            ($ty:ident => $ex:expr) => {
+                #foreach_macro
+            };
+        }
+    };
+
     // TODO should be private, but is leaked by the IntoImpl trait
     let vis = &input.struct_vis;
 
@@ -386,6 +405,7 @@ pub(crate) fn tagset_impl(input: TokenStream) -> syn::Result<TokenStream> {
         const _: () = {
             #match_value_macro
             #match_discriminant_macro
+            #foreach_macro
 
             impl #impl_generics #crate_path::TagSet for #struct_ident #type_generics
             #where_clause {

@@ -232,7 +232,7 @@
 //!         // but sometimes this is not possible (e.g. there is no reciever,
 //!         // or the reciever is not convertable such as Rc<Self>), or not
 //!         // desired.
-//!         // Overrides are provided 2 macros to generate implementations based
+//!         // Overrides are provided 3 macros to generate implementations based
 //!         // based on the included types:
 //!         //   `match_by_value!(value, value_identifier => expr)`
 //!         //     `value` is a value of type `Self`, `&Self`, or `&mut Self`.
@@ -247,6 +247,13 @@
 //!         //       type path corresponding to `discriminant`.
 //!         //     `expr` is an expression in which `type_identifier` will be
 //!         //       substituted for `discriminant`'s corresponding type path.
+//!         //   `foreach!(type_identifier => expr)`
+//!         //     `type_identifier` is any identifier to be substituted with the
+//!         //       type path corresponding to `discriminant`.
+//!         //     `expr` is an expression in which `type_identifier` will be
+//!         //       substituted for each variant's type path. Each expression is
+//!         //       expanded in the current block, so the same local can be passed 
+//!         //       between each expression.
 //!         fn get(&self) -> Self::Output {
 //!             match_by_value!(self, value => value.get() as i64)
 //!         }
