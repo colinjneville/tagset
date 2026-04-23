@@ -390,3 +390,7 @@ fn main() -> anyhow::Result<()> {
 ```
 The default (de)serialization implementation structures the set as a 2-element tuple.
 The first element is the discriminant, the second is the inner variant.
+
+# MSRV
+
+Requires 1.88 for Span file and line number info.

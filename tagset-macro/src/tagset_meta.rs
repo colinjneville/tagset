@@ -1,17 +1,19 @@
-use std::hash::{Hash as _, Hasher as _};
-
 use proc_macro2::{Span, TokenStream};
 use quote::{format_ident, quote};
 use syn::{parse_quote, spanned::Spanned as _};
 
 pub(crate) fn tagset_meta(_attr: TokenStream, item: TokenStream) -> syn::Result<TokenStream> {
-    let mut hasher = std::hash::DefaultHasher::new();
-    // TODO This depends on details of the Span being exposed in the Debug formatting.
-    // Once Span::file stabilizes (hopefully) soon, that should be enough to avoid
-    // all non-contrived collisions.
-    format!("{:?}", item.span()).hash(&mut hasher);
-    item.to_string().hash(&mut hasher);
-    let hash = hasher.finish();
+    // We need a unique identifier, so use the filename combined with the type identifier.
+
+    let line = item.span().start().line.to_string();
+
+    //Alphanumeric and underscores only
+    let unique_ident: String = item.span()
+        .file()
+        .chars()
+        .map(|c| if c.is_alphanumeric() { c } else { '_' })
+        .chain(line.chars())
+        .collect();
 
     let mut item: syn::Item = syn::parse2(item)?;
     let syn::Item::Trait(item_trait) = &item else {
@@ -30,7 +32,7 @@ pub(crate) fn tagset_meta(_attr: TokenStream, item: TokenStream) -> syn::Result<
         let command = telety::v1::TY
             .apply(parse_quote!(super::#ident), needle, haystack)
             .with_fallback(TokenStream::new())
-            .with_macro_forwarding(format_ident!("tagset_telety_{hash}"))
+            .with_macro_forwarding(format_ident!("tagset_telety_{unique_ident}"))
             .with_telety_path(parse_quote!(::tagset::__private::telety));
 
         let module = telety::alias::Module::from_named_item(&item)?.new_child("tagset");
